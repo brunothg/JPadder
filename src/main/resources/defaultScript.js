@@ -130,7 +130,44 @@ function controllerEvent(event){
 	}else if(event.isAxisEvent() || event.isxAxisEvent() || event.isyAxisEvent()){
 		// Need this complicated way, because some controllers(with multiple sticks)
 		// will tell axisEvent for one stick and xAxis/yAxis for the other one
-		
+		switch(event.getControlIndex()){
+			case 0:
+			// Right-Vertical
+				robot.mouseMoveRel(0, source.getAxisValue(0)*10);
+			break;
+			case 1:
+			// Right-Horizontal
+				robot.mouseMoveRel(source.getAxisValue(1)*10, 0);
+			break;
+			case 2:
+			// Left-Vertical
+				if(source.getAxisValue(2)>0.7){
+					// S -> 83
+					robot.keyPress(83);
+				}else if(source.getAxisValue(2)<-0.7){
+					// W -> 87
+					robot.keyPress(87);
+				}else{
+					// Release
+					robot.keyRelease(83);
+					robot.keyRelease(87);
+				}
+			break;
+			case 3:
+			// Left-Horizontal
+				if(source.getAxisValue(3)>0.7){
+					// D -> 68
+					robot.keyPress(68);
+				}else if(source.getAxisValue(3)<-0.7){
+					// A -> 65
+					robot.keyPress(65);
+				}else{
+					// Release
+					robot.keyRelease(68);
+					robot.keyRelease(65);
+				}
+			break;
+		}
 	}
 }
 
@@ -159,6 +196,7 @@ mousePress(int buttons)
 mouseRelease(int buttons)
 mouseWheel(int wheelAmt)
 delay(int ms)
+mouseMoveRel(int x, int y)
 */
 
 /*
