@@ -72,12 +72,12 @@ public class SlidingControl extends JPanel implements ActionListener {
 		panel.add(btnAction, BorderLayout.EAST);
 
 		pbPositive = new JProgressBar();
+		add(pbPositive, BorderLayout.WEST);
 		pbPositive.setPreferredSize(new Dimension(70, 14));
 		pbPositive.setMinimum(0);
 		pbPositive.setMaximum(+100);
 		pbPositive.setBorder(new EmptyBorder(5, 5, 5, 5));
 		pbPositive.setStringPainted(true);
-		panel.add(pbPositive, BorderLayout.WEST);
 	}
 
 	@Override
