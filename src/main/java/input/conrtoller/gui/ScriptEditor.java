@@ -10,6 +10,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.script.ScriptException;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -21,6 +22,7 @@ import javax.swing.border.EmptyBorder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import bno.swing2.dialog.ExceptionDialog;
 import input.conrtoller.data.ScriptPadder;
 import java.awt.Dimension;
 
@@ -112,7 +114,12 @@ public class ScriptEditor extends JPanel implements ActionListener {
 	}
 
 	private void fireOkEvent() {
-		padder.setScript(textArea.getText());
+		try {
+			padder.setScript(textArea.getText());
+		} catch (ScriptException e) {
+			LOG.warn("False custom script", e);
+			ExceptionDialog.showExceptionDialog(this, "Error in script", e.getMessage(), e);
+		}
 		SwingUtilities.windowForComponent(this).dispose();
 	}
 

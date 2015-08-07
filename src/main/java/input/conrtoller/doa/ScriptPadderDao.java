@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+import javax.script.ScriptException;
+
 import input.conrtoller.Constants;
 import input.conrtoller.data.ScriptPadder;
 
@@ -22,6 +24,10 @@ public class ScriptPadderDao {
 
 	public ScriptPadder load() throws IOException {
 		String script = new String(Files.readAllBytes(path), Constants.ENCODING);
-		return new ScriptPadder(script);
+		try {
+			return new ScriptPadder(script);
+		} catch (ScriptException e) {
+			throw new IOException(e);
+		}
 	}
 }
