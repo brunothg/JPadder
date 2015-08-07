@@ -101,6 +101,12 @@
 			<artifactId>lwjgl</artifactId>
 			<version>2.9.3</version>
 		</dependency>
+		<!-- Scripting -->
+		<dependency>
+			<groupId>org.mozilla</groupId>
+			<artifactId>rhino</artifactId>
+			<version>1.7.7</version>
+		</dependency>
 		<!-- GUI -->
 		<dependency>
 			<groupId>de.bno</groupId>
