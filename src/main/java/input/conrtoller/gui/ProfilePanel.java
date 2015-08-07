@@ -12,7 +12,6 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
@@ -189,6 +188,30 @@ public class ProfilePanel extends ApplicationTab implements ActionListener, Cont
 		pnlButtons.repaint();
 	}
 
+	private void updateButton(Controller controller, int index) {
+		int count = pnlButtons.getComponentCount();
+		if (index >= count) {
+			updateButtons(controller);
+			return;
+		}
+
+		OnOffControl contr = (OnOffControl) pnlButtons.getComponent(index);
+		contr.setControlName(controller.getButtonName(index));
+		contr.setIndicator(controller.isButtonPressed(index));
+	}
+
+	private void updateAxis(Controller controller, int index) {
+		int count = pnlAxis.getComponentCount();
+		if (index >= count) {
+			updateAxis(controller);
+			return;
+		}
+
+		SlidingControl axis = (SlidingControl) pnlAxis.getComponent(index);
+		axis.setControlName(controller.getAxisName(index));
+		axis.setValue(controller.getAxisValue(index));
+	}
+
 	private void fireControllerSelectionEvent() {
 		setTitle(getSelectedController().toString());
 		updateHardware();
@@ -202,14 +225,18 @@ public class ProfilePanel extends ApplicationTab implements ActionListener, Cont
 		// TODO fireResetEvent
 	}
 
-	private void fireControllerEvent(ControllerEvent event) {
+	private void fireControllerEvent(final ControllerEvent event) {
+		if (!isVisible()) {
+			return;
+		}
+
 		final Controller source = event.getSource();
 
 		if (event.isButtonEvent()) {
 			SwingUtilities.invokeLater(new Runnable() {
 				@Override
 				public void run() {
-					updateButtons(source);
+					updateButton(source, event.getControlIndex());
 				}
 			});
 		}
@@ -225,7 +252,7 @@ public class ProfilePanel extends ApplicationTab implements ActionListener, Cont
 			SwingUtilities.invokeLater(new Runnable() {
 				@Override
 				public void run() {
-					updateAxis(source);
+					updateAxis(source, event.getControlIndex());
 				}
 			});
 		}

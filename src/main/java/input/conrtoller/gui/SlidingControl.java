@@ -33,11 +33,11 @@ public class SlidingControl extends JPanel implements ActionListener {
 		setControlName(name);
 	}
 
-	private void setControlName(String name) {
+	public void setControlName(String name) {
 		pnlName.setText(name);
 	}
 
-	private void setValue(float value) {
+	public void setValue(float value) {
 
 		if (value > 0) {
 			pbPositive.setForeground(new Color(50, 205, 50));
