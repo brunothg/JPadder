@@ -38,6 +38,70 @@ function controllerEvent(event){
 					robot.keyRelease(73);
 				}
 			break;
+			case 4:
+			// 1 -> 49
+				if(event.isPressed()){
+					robot.keyPress(49);
+				}else{
+					robot.keyRelease(49);
+				}
+			break;
+			case 5:
+			// 2 -> 50
+				if(event.isPressed()){
+					robot.keyPress(50);
+				}else{
+					robot.keyRelease(50);
+				}
+			break;
+			case 6:
+			// 3 -> 51
+				if(event.isPressed()){
+					robot.keyPress(51);
+				}else{
+					robot.keyRelease(51);
+				}
+			break;
+			case 7:
+			// 4 -> 52
+				if(event.isPressed()){
+					robot.keyPress(52);
+				}else{
+					robot.keyRelease(52);
+				}
+			break;
+			case 8:
+			// 5 -> 53
+				if(event.isPressed()){
+					robot.keyPress(53);
+				}else{
+					robot.keyRelease(53);
+				}
+			break;
+			case 9:
+			// 6 -> 54
+				if(event.isPressed()){
+					robot.keyPress(54);
+				}else{
+					robot.keyRelease(54);
+				}
+			break;
+			case 10:
+			// 7 -> 55
+				if(event.isPressed()){
+					robot.keyPress(55);
+				}else{
+					robot.keyRelease(55);
+				}
+			break;
+			case 11:
+			// 8 -> 56
+				if(event.isPressed()){
+					robot.keyPress(56);
+				}else{
+					robot.keyRelease(56);
+				}
+			break;
 		}
 	}else if(event.isPovEvent()){
 		if(source.getPovX()>0.8){
