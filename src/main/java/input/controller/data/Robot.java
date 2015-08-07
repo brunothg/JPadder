@@ -1,4 +1,4 @@
-package input.conrtoller.data;
+package input.controller.data;
 
 import java.awt.AWTException;
 import java.awt.GraphicsDevice;

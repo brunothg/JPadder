@@ -1,4 +1,4 @@
-package input.conrtoller.data;
+package input.controller.data;
 
 import java.awt.AWTException;
 import java.io.IOException;
@@ -12,9 +12,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import bno.swing2.utils.Null;
-import input.conrtoller.Constants;
-import input.conrtoller.data.ControllerEventQueue.ControllerEvent;
-import input.conrtoller.util.IOUtils;
+import input.controller.Constants;
+import input.controller.data.ControllerEventQueue.ControllerEvent;
+import input.controller.util.IOUtils;
 
 public class ScriptPadder implements Padder {
 

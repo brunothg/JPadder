@@ -1,4 +1,4 @@
-package input.conrtoller.gui;
+package input.controller.gui;
 
 import java.awt.Component;
 import java.io.File;
@@ -14,10 +14,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import bno.swing2.dialog.ExceptionDialog;
-import input.conrtoller.Constants;
-import input.conrtoller.data.Padder;
-import input.conrtoller.data.ScriptPadder;
-import input.conrtoller.doa.ScriptPadderDao;
+import input.controller.Constants;
+import input.controller.data.Padder;
+import input.controller.data.ScriptPadder;
+import input.controller.doa.ScriptPadderDao;
 
 public class IO {
 

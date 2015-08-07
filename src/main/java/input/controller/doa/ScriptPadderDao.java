@@ -1,4 +1,4 @@
-package input.conrtoller.doa;
+package input.controller.doa;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -6,8 +6,8 @@ import java.nio.file.Path;
 
 import javax.script.ScriptException;
 
-import input.conrtoller.Constants;
-import input.conrtoller.data.ScriptPadder;
+import input.controller.Constants;
+import input.controller.data.ScriptPadder;
 
 public class ScriptPadderDao {
 

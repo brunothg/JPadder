@@ -1,4 +1,4 @@
-package input.conrtoller.gui;
+package input.controller.gui;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -30,11 +30,11 @@ import com.jgoodies.forms.layout.RowSpec;
 
 import bno.swing2.widget.tab.ApplicationTab;
 import game.engine.image.InternalImage;
-import input.conrtoller.Constants;
-import input.conrtoller.data.ControllerEventQueue.ControllerEvent;
-import input.conrtoller.data.ControllerEventQueue.ControllerListener;
-import input.conrtoller.data.ControllerId;
-import input.conrtoller.data.Padder;
+import input.controller.Constants;
+import input.controller.data.ControllerId;
+import input.controller.data.Padder;
+import input.controller.data.ControllerEventQueue.ControllerEvent;
+import input.controller.data.ControllerEventQueue.ControllerListener;
 
 public class ProfilePanel extends ApplicationTab implements ActionListener, ControllerListener {
 

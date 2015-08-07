@@ -1,4 +1,4 @@
-package input.conrtoller.data;
+package input.controller.data;
 
 import java.util.ArrayList;
 import java.util.List;

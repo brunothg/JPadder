@@ -1,4 +1,4 @@
-package input.conrtoller;
+package input.controller;
 
 import javax.swing.UIManager;
 
@@ -8,8 +8,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import bno.swing2.dialog.ExceptionDialog;
-import input.conrtoller.data.ControllerEventQueue;
-import input.conrtoller.gui.GUI;
+import input.controller.data.ControllerEventQueue;
+import input.controller.gui.GUI;
 
 public class Main {
 

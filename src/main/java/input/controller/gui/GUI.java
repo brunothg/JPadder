@@ -1,4 +1,4 @@
-package input.conrtoller.gui;
+package input.controller.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -21,10 +21,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import bno.swing2.widget.tab.ApplicationTabPanel;
-import input.conrtoller.data.ControllerEventQueue;
-import input.conrtoller.data.ScriptPadder;
-import input.conrtoller.data.ControllerEventQueue.ControllerListener;
-import input.conrtoller.data.Padder;
+import input.controller.data.ControllerEventQueue;
+import input.controller.data.Padder;
+import input.controller.data.ScriptPadder;
+import input.controller.data.ControllerEventQueue.ControllerListener;
 
 public class GUI extends JFrame implements ActionListener {
 

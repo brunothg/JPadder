@@ -1,4 +1,4 @@
-package input.conrtoller.gui;
+package input.controller.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -10,8 +10,8 @@ import javax.swing.SwingUtilities;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import input.conrtoller.data.Padder;
-import input.conrtoller.data.ScriptPadder;
+import input.controller.data.Padder;
+import input.controller.data.ScriptPadder;
 
 public class Editor {
 	private static final Logger LOG = LoggerFactory.getLogger(Editor.class);

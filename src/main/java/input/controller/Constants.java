@@ -1,4 +1,4 @@
-package input.conrtoller;
+package input.controller;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;

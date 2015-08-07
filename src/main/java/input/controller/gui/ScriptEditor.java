@@ -1,4 +1,4 @@
-package input.conrtoller.gui;
+package input.controller.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -25,7 +25,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import bno.swing2.dialog.ExceptionDialog;
-import input.conrtoller.data.ScriptPadder;
+import input.controller.data.ScriptPadder;
 
 public class ScriptEditor extends JPanel implements ActionListener {
 

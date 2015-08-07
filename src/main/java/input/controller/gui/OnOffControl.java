@@ -1,4 +1,4 @@
-package input.conrtoller.gui;
+package input.controller.gui;
 
 import java.awt.BorderLayout;
 
@@ -8,7 +8,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import game.engine.image.InternalImage;
-import input.conrtoller.Constants;
+import input.controller.Constants;
+
 import javax.swing.BoxLayout;
 import java.awt.Font;
 

@@ -1,6 +1,6 @@
-package input.conrtoller.data;
+package input.controller.data;
 
-import input.conrtoller.data.ControllerEventQueue.ControllerEvent;
+import input.controller.data.ControllerEventQueue.ControllerEvent;
 
 public interface Padder {
 	public void translateButtonEvent(ControllerEvent event, int id, boolean pressed);

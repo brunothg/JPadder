@@ -1,4 +1,4 @@
-package input.conrtoller.data;
+package input.controller.data;
 
 import java.util.EventListener;
 import java.util.concurrent.atomic.AtomicLong;
@@ -8,7 +8,7 @@ import javax.swing.event.EventListenerList;
 import org.lwjgl.input.Controller;
 import org.lwjgl.input.Controllers;
 
-import input.conrtoller.Constants;
+import input.controller.Constants;
 
 public class ControllerEventQueue {
 
