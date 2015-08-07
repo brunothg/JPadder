@@ -142,10 +142,10 @@ function controllerEvent(event){
 			case 2:
 			// Left-Vertical
 				if(source.getAxisValue(2)>0.7){
-					// S -> 83
+					// S -> 83, Down -> 40
 					robot.keyPress(83);
 				}else if(source.getAxisValue(2)<-0.7){
-					// W -> 87
+					// W -> 87, Up -> 38
 					robot.keyPress(87);
 				}else{
 					// Release
@@ -156,10 +156,10 @@ function controllerEvent(event){
 			case 3:
 			// Left-Horizontal
 				if(source.getAxisValue(3)>0.7){
-					// D -> 68
+					// D -> 68, Right -> 39
 					robot.keyPress(68);
 				}else if(source.getAxisValue(3)<-0.7){
-					// A -> 65
+					// A -> 65, Left -> 37
 					robot.keyPress(65);
 				}else{
 					// Release
