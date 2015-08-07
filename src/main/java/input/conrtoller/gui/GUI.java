@@ -114,6 +114,10 @@ public class GUI extends JFrame implements ActionListener {
 
 	private void fireLoadProfileEvent() {
 		Padder padder = IO.load(null, this);
+		if (padder == null) {
+			return;
+		}
+
 		profileTabPanel.openTab(new ProfilePanel(padder), true);
 	}
 

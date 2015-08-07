@@ -25,14 +25,17 @@ public class ScriptPadder implements Padder {
 
 	@Override
 	public void translateButtonEvent(ControllerEvent event, int id, boolean pressed) {
+		System.err.println("BTN -----> " + event);
 	}
 
 	@Override
 	public void translateDPadEvent(ControllerEvent event, boolean xAxis, float value) {
+		System.err.println("DP -----> " + event);
 	}
 
 	@Override
 	public void translateAxisEvent(ControllerEvent event, int id, float value) {
+		System.err.println("AX -----> " + event);
 	}
 
 }

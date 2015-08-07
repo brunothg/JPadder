@@ -2,10 +2,12 @@ package input.conrtoller.gui;
 
 import java.awt.Component;
 import java.io.File;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 
 import org.slf4j.Logger;
@@ -26,6 +28,9 @@ public class IO {
 	public static void save(Padder padder, Component parent) {
 
 		Path path = getPath(true, parent);
+		if (path == null) {
+			return;
+		}
 
 		try {
 			if (padder instanceof ScriptPadder) {
@@ -42,6 +47,9 @@ public class IO {
 	public static Padder load(Path p, Component parent) {
 
 		Path path = getPath(false, parent);
+		if (path == null) {
+			return null;
+		}
 
 		try {
 			return new ScriptPadderDao(path).load();
@@ -75,6 +83,15 @@ public class IO {
 		int answer = (save) ? fc.showSaveDialog(parent) : fc.showOpenDialog(parent);
 		if (answer == JFileChooser.APPROVE_OPTION) {
 			last = Paths.get(fc.getSelectedFile().toURI());
+
+			if (save && Files.exists(last)) {
+				int choise = JOptionPane.showConfirmDialog(parent, "Do you want to overwrite this file?",
+						"Already exists", JOptionPane.YES_NO_OPTION);
+				if (choise == JOptionPane.NO_OPTION) {
+					return null;
+				}
+			}
+
 			return last;
 		}
 
