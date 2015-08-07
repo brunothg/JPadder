@@ -4,51 +4,61 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 import javax.swing.border.EmptyBorder;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import bno.swing2.widget.BTextField;
-import game.engine.image.InternalImage;
-import input.conrtoller.Constants;
+import java.awt.Color;
+import java.awt.Dimension;
 
-public class OnOffControl extends JPanel implements ActionListener {
+public class SlidingControl extends JPanel implements ActionListener {
 
-	private static final Logger LOG = LoggerFactory.getLogger(OnOffControl.class);
+	private static final Logger LOG = LoggerFactory.getLogger(SlidingControl.class);
 	private static final long serialVersionUID = 1L;
 	private static final String ACTION_ACTION = "action";
 
 	private BTextField tfAction;
-	private JLabel lblIndicator;
-	private JLabel lblName;
+	private JLabel pnlName;
+	private JProgressBar pbPositive;
 
-	public OnOffControl(boolean on, String name) {
+	public SlidingControl(float value, String name) {
 		createGui();
-		setIndicator(on);
+		setValue(value);
 		setControlName(name);
 	}
 
-	private void createGui() {
-		setLayout(new BorderLayout(0, 0));
-		setBorder(new EmptyBorder(3, 3, 3, 3));
+	private void setControlName(String name) {
+		pnlName.setText(name);
+	}
 
-		lblIndicator = new JLabel("");
-		lblIndicator.setBorder(new EmptyBorder(5, 5, 5, 5));
-		lblIndicator.setIcon(new ImageIcon(InternalImage.loadFromPath(Constants.imageFolder, "off.png")));
-		add(lblIndicator, BorderLayout.WEST);
+	private void setValue(float value) {
+
+		if (value > 0) {
+			pbPositive.setForeground(new Color(50, 205, 50));
+		} else {
+			pbPositive.setForeground(new Color(220, 20, 60));
+		}
+		pbPositive.setValue((int) (100 * Math.abs(value)));
+		pbPositive.setString(((Float) value).toString());
+	}
+
+	private void createGui() {
+		setBorder(new EmptyBorder(3, 3, 3, 3));
+		setLayout(new BorderLayout(0, 0));
 
 		JPanel panel = new JPanel();
 		add(panel, BorderLayout.CENTER);
 		panel.setLayout(new BorderLayout(0, 0));
 
-		lblName = new JLabel("Name");
-		lblName.setBorder(new EmptyBorder(0, 0, 0, 10));
-		panel.add(lblName, BorderLayout.WEST);
+		pnlName = new JLabel("Name");
+		pnlName.setBorder(new EmptyBorder(0, 3, 0, 10));
+		panel.add(pnlName, BorderLayout.WEST);
 
 		tfAction = new BTextField();
 		tfAction.setHint("Action script");
@@ -61,18 +71,13 @@ public class OnOffControl extends JPanel implements ActionListener {
 		btnAction.addActionListener(this);
 		panel.add(btnAction, BorderLayout.EAST);
 
-	}
-
-	public void setControlName(String name) {
-		lblName.setText(name);
-	}
-
-	public void setIndicator(boolean on) {
-		if (on) {
-			lblIndicator.setIcon(new ImageIcon(InternalImage.loadFromPath(Constants.imageFolder, "on.png")));
-		} else {
-			lblIndicator.setIcon(new ImageIcon(InternalImage.loadFromPath(Constants.imageFolder, "off.png")));
-		}
+		pbPositive = new JProgressBar();
+		pbPositive.setPreferredSize(new Dimension(70, 14));
+		pbPositive.setMinimum(0);
+		pbPositive.setMaximum(+100);
+		pbPositive.setBorder(new EmptyBorder(5, 5, 5, 5));
+		pbPositive.setStringPainted(true);
+		panel.add(pbPositive, BorderLayout.WEST);
 	}
 
 	@Override

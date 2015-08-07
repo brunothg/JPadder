@@ -155,8 +155,8 @@ public class ProfilePanel extends ApplicationTab implements ActionListener, Cont
 
 		int axisCount = controller.getAxisCount();
 		for (int i = 0; i < axisCount; i++) {
-			pnlAxis.add(new JLabel(
-					String.format("%d: %s -> %s", i, controller.getAxisName(i), controller.getAxisValue(i))));
+			SlidingControl axis = new SlidingControl(controller.getAxisValue(i), controller.getAxisName(i));
+			pnlAxis.add(axis);
 		}
 
 		pnlAxis.revalidate();
