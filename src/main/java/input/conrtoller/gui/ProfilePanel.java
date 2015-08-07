@@ -166,8 +166,11 @@ public class ProfilePanel extends ApplicationTab implements ActionListener, Cont
 	private void updateDPad(Controller controller) {
 		pnlDPad.removeAll();
 
-		pnlDPad.add(new JLabel(String.format("X -> %s", controller.getPovX())));
-		pnlDPad.add(new JLabel(String.format("Y -> %s", controller.getPovY())));
+		SlidingControl povX = new SlidingControl(controller.getPovX(), "PovX");
+		pnlDPad.add(povX);
+
+		SlidingControl povY = new SlidingControl(controller.getPovY(), "PovY");
+		pnlDPad.add(povY);
 
 		pnlDPad.revalidate();
 		pnlDPad.repaint();
