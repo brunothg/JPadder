@@ -2,6 +2,72 @@
 
 // This function will be invoked at event time
 function controllerEvent(event){
+	var source = event.getSource();
+	
+	if(event.isButtonEvent()){
+		switch(event.getControlIndex()){
+			case 0:
+			// J -> 74
+				if(event.isPressed()){
+					robot.keyPress(74);
+				}else{
+					robot.keyRelease(74);
+				}
+			break;
+			case 1:
+			// K -> 75
+				if(event.isPressed()){
+					robot.keyPress(75);
+				}else{
+					robot.keyRelease(75);
+				}
+			break;
+			case 2:
+			// L -> 76
+				if(event.isPressed()){
+					robot.keyPress(76);
+				}else{
+					robot.keyRelease(76);
+				}
+			break;
+			case 3:
+			// I -> 73
+				if(event.isPressed()){
+					robot.keyPress(73);
+				}else{
+					robot.keyRelease(73);
+				}
+			break;
+		}
+	}else if(event.isPovEvent()){
+		if(source.getPovX()>0.8){
+			// D -> 68
+			robot.keyPress(68);
+		}else if(source.getPovX()<-0.8){
+			// A -> 65
+			robot.keyPress(65);
+		}else{
+			// Release
+			robot.keyRelease(68);
+			robot.keyRelease(65);
+		}
+		
+		if(source.getPovY()>0.8){
+			// S -> 83
+			robot.keyPress(83);
+		}else if(source.getPovY()<-0.8){
+			// W -> 87
+			robot.keyPress(87);
+		}else{
+			// Release
+			robot.keyRelease(83);
+			robot.keyRelease(87);
+		}
+	}else if(event.isAxisEvent() || event.isxAxisEvent() || event.isyAxisEvent()){
+		// Need this complicated way, because some controllers(with multiple sticks)
+		// will tell axisEvent for one stick and xAxis/yAxis for the other one
+		
+	}
 }
 
 /*
