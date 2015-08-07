@@ -1,29 +1,18 @@
 package input.conrtoller.gui;
 
 import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import bno.swing2.widget.BTextField;
 import game.engine.image.InternalImage;
 import input.conrtoller.Constants;
 
-public class OnOffControl extends JPanel implements ActionListener {
+public class OnOffControl extends JPanel {
 
-	private static final Logger LOG = LoggerFactory.getLogger(OnOffControl.class);
 	private static final long serialVersionUID = 1L;
-	private static final String ACTION_ACTION = "action";
-
-	private BTextField tfAction;
 	private JLabel lblIndicator;
 	private JLabel lblName;
 
@@ -50,17 +39,6 @@ public class OnOffControl extends JPanel implements ActionListener {
 		lblName.setBorder(new EmptyBorder(0, 0, 0, 10));
 		panel.add(lblName, BorderLayout.WEST);
 
-		tfAction = new BTextField();
-		tfAction.setHint("Action script");
-		tfAction.setIgnoreHintFocus(true);
-		panel.add(tfAction, BorderLayout.CENTER);
-		tfAction.setColumns(10);
-
-		JButton btnAction = new JButton("Edit");
-		btnAction.setActionCommand(ACTION_ACTION);
-		btnAction.addActionListener(this);
-		panel.add(btnAction, BorderLayout.EAST);
-
 	}
 
 	public void setControlName(String name) {
@@ -72,15 +50,6 @@ public class OnOffControl extends JPanel implements ActionListener {
 			lblIndicator.setIcon(new ImageIcon(InternalImage.loadFromPath(Constants.imageFolder, "on.png")));
 		} else {
 			lblIndicator.setIcon(new ImageIcon(InternalImage.loadFromPath(Constants.imageFolder, "off.png")));
-		}
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		switch (e.getActionCommand()) {
-		default:
-			LOG.warn("Unknown action: '{}'", e.getActionCommand());
-			break;
 		}
 	}
 
