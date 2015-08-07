@@ -21,6 +21,8 @@ import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
 
 import org.lwjgl.input.Controller;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
@@ -37,6 +39,8 @@ import input.conrtoller.data.ControllerId;
 public class ProfilePanel extends ApplicationTab implements ActionListener, ControllerListener {
 
 	private static final long serialVersionUID = 1L;
+	private static final Logger LOG = LoggerFactory.getLogger(ProfilePanel.class);
+
 	private static final String ACTION_REFRESH = "refresh";
 	private static final String ACTION_SAVE = "save";
 	private static final String ACTION_RESET = "reset";
@@ -249,7 +253,7 @@ public class ProfilePanel extends ApplicationTab implements ActionListener, Cont
 			fireResetEvent();
 			break;
 		default:
-			System.out.println("Unknown action " + e.getActionCommand());
+			LOG.warn("Unknown action: '{}'", e.getActionCommand());
 			break;
 		}
 	}

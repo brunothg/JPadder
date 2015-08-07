@@ -17,6 +17,9 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import bno.swing2.widget.tab.ApplicationTabPanel;
 import input.conrtoller.data.ControllerEventQueue;
 import input.conrtoller.data.ControllerEventQueue.ControllerListener;
@@ -24,6 +27,8 @@ import input.conrtoller.data.ControllerEventQueue.ControllerListener;
 public class GUI extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
+	private static final Logger LOG = LoggerFactory.getLogger(GUI.class);
+
 	private static final String ACTION_NEW_PROFILE = "new_profile";
 	private static final String ACTION_LOAD_PROFILE = "load_profile";
 
@@ -75,7 +80,7 @@ public class GUI extends JFrame implements ActionListener {
 			@Override
 			public void componentAdded(ContainerEvent e) {
 				if (e.getChild() instanceof ControllerListener) {
-					System.out.println("New controller profile");
+					LOG.debug("Register new controller profile");
 					ControllerEventQueue.addControllerListener((ControllerListener) e.getChild());
 				}
 			}
@@ -83,7 +88,7 @@ public class GUI extends JFrame implements ActionListener {
 			@Override
 			public void componentRemoved(ContainerEvent e) {
 				if (e.getChild() instanceof ControllerListener) {
-					System.out.println("Remove controller profile");
+					LOG.debug("Remove controller profile");
 					ControllerEventQueue.removeControllerListener((ControllerListener) e.getChild());
 				}
 			}
@@ -100,7 +105,7 @@ public class GUI extends JFrame implements ActionListener {
 			fireLoadProfileEvent();
 			break;
 		default:
-			System.out.println("Unknown cmd " + e.getActionCommand());
+			LOG.warn("Unknown cmd: '{}'", e.getActionCommand());
 			break;
 		}
 	}
