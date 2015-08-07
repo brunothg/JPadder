@@ -116,7 +116,7 @@
 		<dependency>
 			<groupId>de.bno</groupId>
 			<artifactId>de.bno.swing2</artifactId>
-			<version>0.0.3</version>
+			<version>0.0.5</version>
 		</dependency>
 		<dependency>
 			<groupId>com.jgoodies</groupId>

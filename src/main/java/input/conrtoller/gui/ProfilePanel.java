@@ -178,8 +178,8 @@ public class ProfilePanel extends ApplicationTab implements ActionListener, Cont
 
 		int buttonCount = controller.getButtonCount();
 		for (int i = 0; i < buttonCount; i++) {
-			pnlButtons.add(new JLabel(
-					String.format("%d: %s -> %s", i, controller.getButtonName(i), controller.isButtonPressed(i))));
+			OnOffControl button = new OnOffControl(controller.isButtonPressed(i), controller.getButtonName(i));
+			pnlButtons.add(button);
 		}
 
 		pnlButtons.revalidate();
