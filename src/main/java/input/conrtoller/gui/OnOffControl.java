@@ -9,17 +9,22 @@ import javax.swing.border.EmptyBorder;
 
 import game.engine.image.InternalImage;
 import input.conrtoller.Constants;
+import javax.swing.BoxLayout;
+import java.awt.Font;
 
 public class OnOffControl extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private JLabel lblIndicator;
 	private JLabel lblName;
+	private JLabel lblNewLabel;
+	private JLabel lblId;
 
-	public OnOffControl(boolean on, String name) {
+	public OnOffControl(boolean on, String name, String id) {
 		createGui();
 		setIndicator(on);
 		setControlName(name);
+		setId(id);
 	}
 
 	private void createGui() {
@@ -33,12 +38,23 @@ public class OnOffControl extends JPanel {
 
 		JPanel panel = new JPanel();
 		add(panel, BorderLayout.CENTER);
-		panel.setLayout(new BorderLayout(0, 0));
+		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
 
 		lblName = new JLabel("Name");
 		lblName.setBorder(new EmptyBorder(0, 0, 0, 10));
-		panel.add(lblName, BorderLayout.WEST);
+		panel.add(lblName);
 
+		lblNewLabel = new JLabel("ControlID: ");
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
+		panel.add(lblNewLabel);
+
+		lblId = new JLabel("<N/A>");
+		panel.add(lblId);
+
+	}
+
+	public void setId(String id) {
+		lblId.setText(id);
 	}
 
 	public void setControlName(String name) {

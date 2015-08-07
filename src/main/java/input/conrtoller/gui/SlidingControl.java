@@ -8,17 +8,26 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.border.EmptyBorder;
+import javax.swing.BoxLayout;
+import java.awt.Font;
 
 public class SlidingControl extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private JLabel pnlName;
 	private JProgressBar pbPositive;
+	private JLabel lblNewLabel;
+	private JLabel pnlId;
 
-	public SlidingControl(float value, String name) {
+	public SlidingControl(float value, String name, String id) {
 		createGui();
 		setValue(value);
 		setControlName(name);
+		setId(id);
+	}
+
+	public void setId(String id) {
+		pnlId.setText(id);
 	}
 
 	public void setControlName(String name) {
@@ -42,11 +51,18 @@ public class SlidingControl extends JPanel {
 
 		JPanel panel = new JPanel();
 		add(panel, BorderLayout.CENTER);
-		panel.setLayout(new BorderLayout(0, 0));
+		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
 
 		pnlName = new JLabel("Name");
 		pnlName.setBorder(new EmptyBorder(0, 3, 0, 10));
-		panel.add(pnlName, BorderLayout.WEST);
+		panel.add(pnlName);
+
+		lblNewLabel = new JLabel("ControlId: ");
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
+		panel.add(lblNewLabel);
+
+		pnlId = new JLabel("<N/A>");
+		panel.add(pnlId);
 
 		pbPositive = new JProgressBar();
 		add(pbPositive, BorderLayout.WEST);

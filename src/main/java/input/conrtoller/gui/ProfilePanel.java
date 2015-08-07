@@ -34,6 +34,7 @@ import input.conrtoller.Constants;
 import input.conrtoller.data.ControllerEventQueue.ControllerEvent;
 import input.conrtoller.data.ControllerEventQueue.ControllerListener;
 import input.conrtoller.data.ControllerId;
+import input.conrtoller.data.Padder;
 
 public class ProfilePanel extends ApplicationTab implements ActionListener, ControllerListener {
 
@@ -42,7 +43,9 @@ public class ProfilePanel extends ApplicationTab implements ActionListener, Cont
 
 	private static final String ACTION_REFRESH = "refresh";
 	private static final String ACTION_SAVE = "save";
-	private static final String ACTION_RESET = "reset";
+	private static final String ACTION_EDIT = "edit";
+
+	private Padder padder;
 
 	private JComboBox<ControllerId> cbController;
 	private DefaultComboBoxModel<ControllerId> cbControllerModel;
@@ -91,12 +94,12 @@ public class ProfilePanel extends ApplicationTab implements ActionListener, Cont
 		btnSave.addActionListener(this);
 		toolBar.add(btnSave);
 
-		JButton btnReset = new JButton("Reset");
-		btnReset.setIcon(new ImageIcon(InternalImage.loadFromPath(Constants.imageFolder, "reset.png")));
-		btnReset.setMnemonic('r');
-		btnReset.setActionCommand(ACTION_RESET);
-		btnReset.addActionListener(this);
-		toolBar.add(btnReset);
+		JButton btnEdit = new JButton("Edit");
+		btnEdit.setIcon(new ImageIcon(InternalImage.loadFromPath(Constants.imageFolder, "edit.png")));
+		btnEdit.setMnemonic('r');
+		btnEdit.setActionCommand(ACTION_EDIT);
+		btnEdit.addActionListener(this);
+		toolBar.add(btnEdit);
 
 		JSeparator separator = new JSeparator();
 		panel.add(separator, "2, 4, 3, 1");
@@ -154,7 +157,7 @@ public class ProfilePanel extends ApplicationTab implements ActionListener, Cont
 
 		int axisCount = controller.getAxisCount();
 		for (int i = 0; i < axisCount; i++) {
-			SlidingControl axis = new SlidingControl(controller.getAxisValue(i), controller.getAxisName(i));
+			SlidingControl axis = new SlidingControl(controller.getAxisValue(i), controller.getAxisName(i), "" + i);
 			pnlAxis.add(axis);
 		}
 
@@ -165,10 +168,10 @@ public class ProfilePanel extends ApplicationTab implements ActionListener, Cont
 	private void updateDPad(Controller controller) {
 		pnlDPad.removeAll();
 
-		SlidingControl povX = new SlidingControl(controller.getPovX(), "PovX");
+		SlidingControl povX = new SlidingControl(controller.getPovX(), "PovX", "<N/A>");
 		pnlDPad.add(povX);
 
-		SlidingControl povY = new SlidingControl(controller.getPovY(), "PovY");
+		SlidingControl povY = new SlidingControl(controller.getPovY(), "PovY", "<N/A>");
 		pnlDPad.add(povY);
 
 		pnlDPad.revalidate();
@@ -180,7 +183,7 @@ public class ProfilePanel extends ApplicationTab implements ActionListener, Cont
 
 		int buttonCount = controller.getButtonCount();
 		for (int i = 0; i < buttonCount; i++) {
-			OnOffControl button = new OnOffControl(controller.isButtonPressed(i), controller.getButtonName(i));
+			OnOffControl button = new OnOffControl(controller.isButtonPressed(i), controller.getButtonName(i), "" + i);
 			pnlButtons.add(button);
 		}
 
@@ -198,6 +201,7 @@ public class ProfilePanel extends ApplicationTab implements ActionListener, Cont
 		OnOffControl contr = (OnOffControl) pnlButtons.getComponent(index);
 		contr.setControlName(controller.getButtonName(index));
 		contr.setIndicator(controller.isButtonPressed(index));
+		contr.setId("" + index);
 	}
 
 	private void updateAxis(Controller controller, int index) {
@@ -210,6 +214,7 @@ public class ProfilePanel extends ApplicationTab implements ActionListener, Cont
 		SlidingControl axis = (SlidingControl) pnlAxis.getComponent(index);
 		axis.setControlName(controller.getAxisName(index));
 		axis.setValue(controller.getAxisValue(index));
+		axis.setId("" + index);
 	}
 
 	private void fireControllerSelectionEvent() {
@@ -221,8 +226,8 @@ public class ProfilePanel extends ApplicationTab implements ActionListener, Cont
 		// TODO fireSaveEvent
 	}
 
-	private void fireResetEvent() {
-		// TODO fireResetEvent
+	private void fireEditEvent() {
+		// TODO fireEditEvent
 	}
 
 	private void fireControllerEvent(final ControllerEvent event) {
@@ -239,6 +244,10 @@ public class ProfilePanel extends ApplicationTab implements ActionListener, Cont
 					updateButton(source, event.getControlIndex());
 				}
 			});
+			if (padder != null) {
+				padder.translateButtonEvent(event, event.getControlIndex(),
+						source.isButtonPressed(event.getControlIndex()));
+			}
 		}
 		if (event.isPovEvent()) {
 			SwingUtilities.invokeLater(new Runnable() {
@@ -247,6 +256,10 @@ public class ProfilePanel extends ApplicationTab implements ActionListener, Cont
 					updateDPad(source);
 				}
 			});
+			if (padder != null) {
+				padder.translateDPadEvent(event, event.isxPovEvent(),
+						(event.isxPovEvent()) ? source.getPovX() : source.getPovY());
+			}
 		}
 		if (event.isAxisEvent() || event.isxAxisEvent() || event.isyAxisEvent()) {
 			SwingUtilities.invokeLater(new Runnable() {
@@ -255,6 +268,9 @@ public class ProfilePanel extends ApplicationTab implements ActionListener, Cont
 					updateAxis(source, event.getControlIndex());
 				}
 			});
+			if (padder != null) {
+				padder.translateAxisEvent(event, event.getControlIndex(), source.getAxisValue(event.getControlIndex()));
+			}
 		}
 	}
 
@@ -279,8 +295,8 @@ public class ProfilePanel extends ApplicationTab implements ActionListener, Cont
 		case ACTION_SAVE:
 			fireSaveEvent();
 			break;
-		case ACTION_RESET:
-			fireResetEvent();
+		case ACTION_EDIT:
+			fireEditEvent();
 			break;
 		default:
 			LOG.warn("Unknown action: '{}'", e.getActionCommand());
