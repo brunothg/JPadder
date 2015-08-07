@@ -84,6 +84,10 @@ public class IO {
 		if (answer == JFileChooser.APPROVE_OPTION) {
 			last = Paths.get(fc.getSelectedFile().toURI());
 
+			if (save && !last.getFileName().toString().endsWith(Constants.FILE_EXTENSION)) {
+				last = last.getParent().resolve(last.getFileName().toString() + Constants.FILE_EXTENSION);
+			}
+
 			if (save && Files.exists(last)) {
 				int choise = JOptionPane.showConfirmDialog(parent, "Do you want to overwrite this file?",
 						"Already exists", JOptionPane.YES_NO_OPTION);

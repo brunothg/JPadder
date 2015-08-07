@@ -1,10 +1,12 @@
 package input.conrtoller.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.InputEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -24,7 +26,6 @@ import org.slf4j.LoggerFactory;
 
 import bno.swing2.dialog.ExceptionDialog;
 import input.conrtoller.data.ScriptPadder;
-import java.awt.Dimension;
 
 public class ScriptEditor extends JPanel implements ActionListener {
 
@@ -66,11 +67,12 @@ public class ScriptEditor extends JPanel implements ActionListener {
 		panel.add(btnCancel);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setPreferredSize(new Dimension(200, 200));
+		scrollPane.setPreferredSize(new Dimension(400, 200));
 		add(scrollPane, BorderLayout.CENTER);
 
 		textArea = new JTextArea();
 		textArea.setText(padder.getScript());
+		textArea.setCaretPosition(0);
 		scrollPane.setViewportView(textArea);
 
 		JPanel panel_1 = new JPanel();
@@ -104,7 +106,15 @@ public class ScriptEditor extends JPanel implements ActionListener {
 		textArea.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				lblButtonCode.setText("" + e.getButton());
+				int mask = 0;
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					mask = InputEvent.BUTTON1_MASK;
+				} else if (SwingUtilities.isMiddleMouseButton(e)) {
+					mask = InputEvent.BUTTON2_MASK;
+				} else if (SwingUtilities.isRightMouseButton(e)) {
+					mask = InputEvent.BUTTON3_MASK;
+				}
+				lblButtonCode.setText(mask + "(" + e.getButton() + ")");
 			}
 		});
 	}
