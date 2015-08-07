@@ -8,4 +8,5 @@ public interface Padder {
 	public void translateDPadEvent(ControllerEvent event, boolean xAxis, float value);
 
 	public void translateAxisEvent(ControllerEvent event, int id, float value);
+
 }

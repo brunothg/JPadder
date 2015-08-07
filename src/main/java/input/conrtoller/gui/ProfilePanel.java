@@ -54,7 +54,9 @@ public class ProfilePanel extends ApplicationTab implements ActionListener, Cont
 	private JPanel pnlDPad;
 	private JPanel pnlAxis;
 
-	public ProfilePanel() {
+	public ProfilePanel(Padder padder) {
+
+		this.padder = padder;
 
 		setTitle("undefined");
 		createGui();
@@ -223,11 +225,11 @@ public class ProfilePanel extends ApplicationTab implements ActionListener, Cont
 	}
 
 	private void fireSaveEvent() {
-		// TODO fireSaveEvent
+		IO.save(padder, this);
 	}
 
 	private void fireEditEvent() {
-		// TODO fireEditEvent
+		Editor.edit(padder, this);
 	}
 
 	private void fireControllerEvent(final ControllerEvent event) {

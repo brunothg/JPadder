@@ -22,7 +22,9 @@ import org.slf4j.LoggerFactory;
 
 import bno.swing2.widget.tab.ApplicationTabPanel;
 import input.conrtoller.data.ControllerEventQueue;
+import input.conrtoller.data.ScriptPadder;
 import input.conrtoller.data.ControllerEventQueue.ControllerListener;
+import input.conrtoller.data.Padder;
 
 public class GUI extends JFrame implements ActionListener {
 
@@ -111,11 +113,12 @@ public class GUI extends JFrame implements ActionListener {
 	}
 
 	private void fireLoadProfileEvent() {
-		// TODO fireLoadProfileEvent
+		Padder padder = IO.load(null, this);
+		profileTabPanel.openTab(new ProfilePanel(padder), true);
 	}
 
 	private void fireNewProfileEvent() {
-		profileTabPanel.openTab(new ProfilePanel(), true);
+		profileTabPanel.openTab(new ProfilePanel(new ScriptPadder()), true);
 	}
 
 }
