@@ -1,6 +1,7 @@
 JPadder
 -------
 Map controller events to keybord/mouse events
+Mapping is done with easy JavaScript profiles
 Runs on Windows, Linux and Mac
 
 
