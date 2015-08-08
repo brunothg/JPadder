@@ -69,7 +69,9 @@ public class ControllerEventQueue {
 		@Override
 		public void run() {
 			while (!isInterrupted()) {
-				poll();
+				synchronized (listenerList) {
+					poll();
+				}
 				try {
 					Thread.sleep(getPollTime());
 				} catch (InterruptedException e) {
@@ -80,7 +82,15 @@ public class ControllerEventQueue {
 
 		private void poll() {
 
+			synchronized (listenerList) {
+				if (listenerList.getListenerCount() <= 0) {
+					return;
+				}
+			}
+
 			Controllers.poll();
+
+			// Event driven
 			while (Controllers.next()) {
 				Controller source = Controllers.getEventSource();
 
@@ -95,6 +105,12 @@ public class ControllerEventQueue {
 				event.setPressed(Controllers.getEventButtonState());
 				event.setControlIndex(Controllers.getEventControlIndex());
 
+				fireControllerEvent(event);
+			}
+
+			// Poll driven
+			for (int i = 0; i < Controllers.getControllerCount(); i++) {
+				ControllerEvent event = new ControllerEvent(Controllers.getController(i));
 				fireControllerEvent(event);
 			}
 		}
@@ -116,15 +132,15 @@ public class ControllerEventQueue {
 	public static class ControllerEvent {
 
 		private Controller source;
-		private boolean buttonEvent;
-		private boolean axisEvent;
-		private boolean xAxisEvent;
-		private boolean yAxisEvent;
-		private boolean povEvent;
-		private boolean xPovEvent;
-		private boolean yPovEvent;
-		private boolean pressed;
-		private int controlIndex;
+		private boolean buttonEvent = false;
+		private boolean axisEvent = false;
+		private boolean xAxisEvent = false;
+		private boolean yAxisEvent = false;
+		private boolean povEvent = false;
+		private boolean xPovEvent = false;
+		private boolean yPovEvent = false;
+		private boolean pressed = false;
+		private int controlIndex = -1;
 
 		public ControllerEvent(Controller source) {
 			this.source = source;

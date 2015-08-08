@@ -239,7 +239,9 @@ public class ProfilePanel extends ApplicationTab implements ActionListener, Cont
 
 		final Controller source = event.getSource();
 
+		boolean isEventDriven = false;
 		if (event.isButtonEvent()) {
+			isEventDriven = true;
 			SwingUtilities.invokeLater(new Runnable() {
 				@Override
 				public void run() {
@@ -252,6 +254,7 @@ public class ProfilePanel extends ApplicationTab implements ActionListener, Cont
 			}
 		}
 		if (event.isPovEvent()) {
+			isEventDriven = true;
 			SwingUtilities.invokeLater(new Runnable() {
 				@Override
 				public void run() {
@@ -264,6 +267,7 @@ public class ProfilePanel extends ApplicationTab implements ActionListener, Cont
 			}
 		}
 		if (event.isAxisEvent() || event.isxAxisEvent() || event.isyAxisEvent()) {
+			isEventDriven = true;
 			SwingUtilities.invokeLater(new Runnable() {
 				@Override
 				public void run() {
@@ -272,6 +276,12 @@ public class ProfilePanel extends ApplicationTab implements ActionListener, Cont
 			});
 			if (padder != null) {
 				padder.translateAxisEvent(event, event.getControlIndex(), source.getAxisValue(event.getControlIndex()));
+			}
+		}
+
+		if (!isEventDriven) {
+			if (padder != null) {
+				padder.pollEvent(event);
 			}
 		}
 	}
@@ -310,6 +320,7 @@ public class ProfilePanel extends ApplicationTab implements ActionListener, Cont
 	public void action(ControllerEvent event) {
 		ControllerId controller = getSelectedController();
 		Controller source = event.getSource();
+
 		if (source.getIndex() != controller.getId() || !source.getName().equals(controller.getName())) {
 			return;
 		}

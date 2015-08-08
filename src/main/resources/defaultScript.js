@@ -133,11 +133,9 @@ function controllerEvent(event){
 		switch(event.getControlIndex()){
 			case 0:
 			// Right-Vertical
-				robot.mouseMoveRel(0, source.getAxisValue(0)*10);
 			break;
 			case 1:
 			// Right-Horizontal
-				robot.mouseMoveRel(source.getAxisValue(1)*10, 0);
 			break;
 			case 2:
 			// Left-Vertical
@@ -167,6 +165,14 @@ function controllerEvent(event){
 					robot.keyRelease(65);
 				}
 			break;
+		}
+	}else{
+		// No event occoured this frame -> poll event
+		if(Math.abs(source.getAxisValue(0))>0.1){
+			robot.mouseMoveRel(0, +Math.round(source.getAxisValue(0)*5));
+		}
+		if(Math.abs(source.getAxisValue(1))>0.1){
+			robot.mouseMoveRel(+Math.round(source.getAxisValue(1)*5), 0);
 		}
 	}
 }

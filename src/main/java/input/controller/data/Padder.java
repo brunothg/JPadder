@@ -9,4 +9,6 @@ public interface Padder {
 
 	public void translateAxisEvent(ControllerEvent event, int id, float value);
 
+	public void pollEvent(ControllerEvent event);
+
 }

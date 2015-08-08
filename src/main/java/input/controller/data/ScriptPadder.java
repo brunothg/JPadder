@@ -98,6 +98,15 @@ public class ScriptPadder implements Padder {
 		}
 	}
 
+	@Override
+	public void pollEvent(ControllerEvent event) {
+		try {
+			runScript(event);
+		} catch (ScriptException e) {
+			LOG.warn("Script error", e);
+		}
+	}
+
 	private ScriptEngine getEngine() throws ScriptException {
 		if (engine == null) {
 			engine = Null.nvl(factory.getEngineByName("rhino"), factory.getEngineByMimeType("text/javascript"));
