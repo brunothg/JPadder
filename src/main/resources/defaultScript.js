@@ -169,10 +169,10 @@ function controllerEvent(event){
 	}else{
 		// No event occoured this frame -> poll event
 		if(Math.abs(source.getAxisValue(0))>0.1){
-			robot.mouseMoveRel(0, +Math.round(source.getAxisValue(0)*15));
+			robot.mouseMoveRel(0, +Math.round(source.getAxisValue(0)*30));
 		}
 		if(Math.abs(source.getAxisValue(1))>0.1){
-			robot.mouseMoveRel(+Math.round(source.getAxisValue(1)*15), 0);
+			robot.mouseMoveRel(+Math.round(source.getAxisValue(1)*30), 0);
 		}
 	}
 }
