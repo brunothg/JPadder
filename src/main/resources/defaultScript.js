@@ -95,11 +95,11 @@ function controllerEvent(event){
 				}
 			break;
 			case 11:
-			// 8 -> 56
+			// Left mouse button -> 16
 				if(event.isPressed()){
-					robot.keyPress(56);
+					robot.mousePress(16);
 				}else{
-					robot.keyRelease(56);
+					robot.mouseRelease(16);
 				}
 			break;
 		}
@@ -169,10 +169,10 @@ function controllerEvent(event){
 	}else{
 		// No event occoured this frame -> poll event
 		if(Math.abs(source.getAxisValue(0))>0.1){
-			robot.mouseMoveRel(0, +Math.round(source.getAxisValue(0)*5));
+			robot.mouseMoveRel(0, +Math.round(source.getAxisValue(0)*15));
 		}
 		if(Math.abs(source.getAxisValue(1))>0.1){
-			robot.mouseMoveRel(+Math.round(source.getAxisValue(1)*5), 0);
+			robot.mouseMoveRel(+Math.round(source.getAxisValue(1)*15), 0);
 		}
 	}
 }
