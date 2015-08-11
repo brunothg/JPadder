@@ -7,10 +7,15 @@ import javax.swing.event.EventListenerList;
 
 import org.lwjgl.input.Controller;
 import org.lwjgl.input.Controllers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import input.controller.Constants;
+import input.controller.Main;
 
 public class ControllerEventQueue {
+
+	private static final Logger LOG = LoggerFactory.getLogger(Main.class);
 
 	private static EventListenerList listenerList = new EventListenerList();
 	private static AtomicLong pollTime = new AtomicLong(Constants.CONTROLLER_POLL_INTERVAL);
@@ -66,6 +71,11 @@ public class ControllerEventQueue {
 	}
 
 	private static class EventThread extends Thread {
+
+		public EventThread() {
+			super("ControllerEventQueue");
+		}
+
 		@Override
 		public void run() {
 			while (!isInterrupted()) {
@@ -123,7 +133,12 @@ public class ControllerEventQueue {
 						listenerList.remove(ControllerListener.class, listener);
 						continue;
 					}
-					listener.action(event);
+
+					try {
+						listener.action(event);
+					} catch (Exception e) {
+						LOG.warn("Controllerevent listener failed", e);
+					}
 				}
 			}
 		}
