@@ -19,7 +19,7 @@ public class Main {
 
 		try {
 			_main(args);
-		} catch (Exception e) {
+		} catch (Throwable e) {
 			LOG.error("Unknown error", e);
 			ExceptionDialog.showExceptionDialog(null, e);
 			System.exit(-1);
@@ -27,9 +27,8 @@ public class Main {
 
 	}
 
-	private static void _main(String[] args) throws Exception {
+	private static void _main(String[] args) throws Throwable {
 		Robot.iniInputDevices();
-
 		GUI gui = new GUI();
 		gui.setVisible(true);
 	}
