@@ -17,61 +17,79 @@ public class ControllerEventQueue {
 	private static final Logger LOG = LoggerFactory
 			.getLogger(ControllerEventQueue.class);
 
-	private static EventListenerList listenerList = new EventListenerList();
-	private static AtomicLong pollTime = new AtomicLong(
-			Constants.CONTROLLER_POLL_INTERVAL);
-	private static EventThread thread;
+	private static ControllerEventQueue INSTANCE;
 
-	public static long getPollTime() {
+	private EventListenerList listenerList = new EventListenerList();
+	private AtomicLong pollTime = new AtomicLong(
+			Constants.CONTROLLER_POLL_INTERVAL);
+	private EventThread eventThread;
+
+	private ControllerEventQueue() {
+	}
+
+	public static ControllerEventQueue getInstance() {
+		if (INSTANCE == null) {
+			INSTANCE = new ControllerEventQueue();
+		}
+		return INSTANCE;
+	}
+
+	public long getPollTime() {
 		return pollTime.get();
 	}
 
-	public static long setPollTime(long pollTime) {
-		return ControllerEventQueue.pollTime.getAndSet(pollTime);
+	public long setPollTime(long pollTime) {
+		LOG.info("Set poll time {}", pollTime);
+		return this.pollTime.getAndSet(pollTime);
 	}
 
-	public static void addControllerListener(ControllerListener l) {
+	public void addControllerListener(ControllerListener l) {
 		synchronized (listenerList) {
 			listenerList.add(ControllerListener.class, l);
 		}
 	}
 
-	public static void removeControllerListener(ControllerListener l) {
+	public void removeControllerListener(ControllerListener l) {
 		synchronized (listenerList) {
 			listenerList.remove(ControllerListener.class, l);
 		}
 	}
 
-	public static boolean create() {
-		if (thread != null) {
+	/**
+	 * If not started starts the event queue.
+	 * 
+	 * @return true, if a new event queue was started, false otherwise
+	 */
+	public boolean start() {
+		if (eventThread != null) {
 			return false;
 		}
 
-		thread = new EventThread();
-		thread.start();
+		eventThread = new EventThread();
+		eventThread.start();
 
 		return true;
 	}
 
-	public static boolean destroy() {
+	public boolean destroy() {
 		return destroy(0);
 	}
 
-	public static boolean destroy(long millisWait) {
-		if (thread == null) {
+	public boolean destroy(long millisWait) {
+		if (eventThread == null) {
 			return false;
 		}
 
-		thread.interrupt();
+		eventThread.interrupt();
 		try {
-			thread.join(millisWait);
+			eventThread.join(millisWait);
 		} catch (InterruptedException e) {
 		}
 
 		return true;
 	}
 
-	private static class EventThread extends Thread {
+	private class EventThread extends Thread {
 
 		public EventThread() {
 			super("ControllerEventQueue");

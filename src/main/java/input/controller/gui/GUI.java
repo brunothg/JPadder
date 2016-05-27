@@ -35,9 +35,12 @@ public class GUI extends JFrame implements ActionListener {
 	private static final String ACTION_LOAD_PROFILE = "load_profile";
 
 	private ApplicationTabPanel profileTabPanel;
+	private ControllerEventQueue eventQueue = ControllerEventQueue
+			.getInstance();
 
 	public GUI() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(GUI.class.getResource("/game/engine/media/icon.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(
+				GUI.class.getResource("/game/engine/media/icon.png")));
 		setTitle("JPadder");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
@@ -58,13 +61,15 @@ public class GUI extends JFrame implements ActionListener {
 		JMenuItem mntmNewProfile = new JMenuItem("New Profile");
 		mntmNewProfile.setActionCommand(ACTION_NEW_PROFILE);
 		mntmNewProfile.addActionListener(this);
-		mntmNewProfile.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_MASK));
+		mntmNewProfile.setAccelerator(
+				KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_MASK));
 		mnFile.add(mntmNewProfile);
 
 		JMenuItem mntmLoadProfile = new JMenuItem("Load Profile");
 		mntmLoadProfile.setActionCommand(ACTION_LOAD_PROFILE);
 		mntmLoadProfile.addActionListener(this);
-		mntmLoadProfile.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK));
+		mntmLoadProfile.setAccelerator(
+				KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK));
 		mnFile.add(mntmLoadProfile);
 	}
 
@@ -83,7 +88,8 @@ public class GUI extends JFrame implements ActionListener {
 			public void componentAdded(ContainerEvent e) {
 				if (e.getChild() instanceof ControllerListener) {
 					LOG.debug("Register new controller profile");
-					ControllerEventQueue.addControllerListener((ControllerListener) e.getChild());
+					eventQueue.addControllerListener(
+							(ControllerListener) e.getChild());
 				}
 			}
 
@@ -91,7 +97,8 @@ public class GUI extends JFrame implements ActionListener {
 			public void componentRemoved(ContainerEvent e) {
 				if (e.getChild() instanceof ControllerListener) {
 					LOG.debug("Remove controller profile");
-					ControllerEventQueue.removeControllerListener((ControllerListener) e.getChild());
+					eventQueue.removeControllerListener(
+							(ControllerListener) e.getChild());
 				}
 			}
 		};

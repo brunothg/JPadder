@@ -40,6 +40,6 @@ public class Robot extends java.awt.Robot {
 		Controllers.create();
 
 		LOG.debug("Create event queue");
-		ControllerEventQueue.create();
+		ControllerEventQueue.getInstance().start();
 	}
 }
