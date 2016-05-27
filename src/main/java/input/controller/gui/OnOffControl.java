@@ -41,7 +41,7 @@ public class OnOffControl extends JPanel {
 		lblIndicator = new JLabel("");
 		lblIndicator.setBorder(new EmptyBorder(5, 5, 5, 5));
 		lblIndicator.setIcon(new ImageIcon(
-				InternalImage.loadFromPath(Constants.imageFolder, "off.png")));
+				InternalImage.loadFromPath(Constants.IMAGE_FOLDER, "off.png")));
 		add(lblIndicator, BorderLayout.WEST);
 
 		JPanel panel = new JPanel();
@@ -72,10 +72,10 @@ public class OnOffControl extends JPanel {
 	public void setIndicator(boolean on) {
 		if (on) {
 			lblIndicator.setIcon(new ImageIcon(InternalImage
-					.loadFromPath(Constants.imageFolder, "on.png")));
+					.loadFromPath(Constants.IMAGE_FOLDER, "on.png")));
 		} else {
 			lblIndicator.setIcon(new ImageIcon(InternalImage
-					.loadFromPath(Constants.imageFolder, "off.png")));
+					.loadFromPath(Constants.IMAGE_FOLDER, "off.png")));
 		}
 	}
 

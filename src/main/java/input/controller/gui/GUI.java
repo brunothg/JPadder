@@ -2,7 +2,6 @@ package input.controller.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ContainerAdapter;
@@ -21,6 +20,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import bno.swing2.widget.tab.ApplicationTabPanel;
+import game.engine.image.InternalImage;
+import input.controller.Constants;
 import input.controller.logic.ControllerEventQueue;
 import input.controller.logic.ControllerEventQueue.ControllerListener;
 import input.controller.logic.padder.Padder;
@@ -39,8 +40,8 @@ public class GUI extends JFrame implements ActionListener {
 			.getInstance();
 
 	public GUI() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(
-				GUI.class.getResource("/game/engine/media/icon.png")));
+		setIconImage(
+				InternalImage.loadFromPath(Constants.IMAGE_FOLDER, "icon.png"));
 		setTitle("JPadder");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);

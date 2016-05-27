@@ -90,14 +90,14 @@ public class ProfilePanel extends ApplicationTab implements ActionListener, Cont
 		panel.add(toolBar, "2, 2, 3, 1");
 
 		JButton btnSave = new JButton("Save");
-		btnSave.setIcon(new ImageIcon(InternalImage.loadFromPath(Constants.imageFolder, "save.png")));
+		btnSave.setIcon(new ImageIcon(InternalImage.loadFromPath(Constants.IMAGE_FOLDER, "save.png")));
 		btnSave.setMnemonic('s');
 		btnSave.setActionCommand(ACTION_SAVE);
 		btnSave.addActionListener(this);
 		toolBar.add(btnSave);
 
 		JButton btnEdit = new JButton("Edit");
-		btnEdit.setIcon(new ImageIcon(InternalImage.loadFromPath(Constants.imageFolder, "edit.png")));
+		btnEdit.setIcon(new ImageIcon(InternalImage.loadFromPath(Constants.IMAGE_FOLDER, "edit.png")));
 		btnEdit.setMnemonic('r');
 		btnEdit.setActionCommand(ACTION_EDIT);
 		btnEdit.addActionListener(this);
@@ -110,7 +110,7 @@ public class ProfilePanel extends ApplicationTab implements ActionListener, Cont
 		JButton btnRefresh = new JButton("");
 		btnRefresh.setActionCommand(ACTION_REFRESH);
 		btnRefresh.addActionListener(this);
-		btnRefresh.setIcon(new ImageIcon(InternalImage.loadFromPath(Constants.imageFolder, "refresh.png")));
+		btnRefresh.setIcon(new ImageIcon(InternalImage.loadFromPath(Constants.IMAGE_FOLDER, "refresh.png")));
 		btnRefresh.setToolTipText("Refresh");
 		panel.add(btnRefresh, "4, 6");
 
