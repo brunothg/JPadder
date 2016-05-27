@@ -13,6 +13,12 @@ import input.controller.Constants;
 import javax.swing.BoxLayout;
 import java.awt.Font;
 
+/**
+ * 
+ * @author marvin
+ * 
+ *         One control indicator row. Shows the button state on/off.
+ */
 public class OnOffControl extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -34,7 +40,8 @@ public class OnOffControl extends JPanel {
 
 		lblIndicator = new JLabel("");
 		lblIndicator.setBorder(new EmptyBorder(5, 5, 5, 5));
-		lblIndicator.setIcon(new ImageIcon(InternalImage.loadFromPath(Constants.imageFolder, "off.png")));
+		lblIndicator.setIcon(new ImageIcon(
+				InternalImage.loadFromPath(Constants.imageFolder, "off.png")));
 		add(lblIndicator, BorderLayout.WEST);
 
 		JPanel panel = new JPanel();
@@ -64,9 +71,11 @@ public class OnOffControl extends JPanel {
 
 	public void setIndicator(boolean on) {
 		if (on) {
-			lblIndicator.setIcon(new ImageIcon(InternalImage.loadFromPath(Constants.imageFolder, "on.png")));
+			lblIndicator.setIcon(new ImageIcon(InternalImage
+					.loadFromPath(Constants.imageFolder, "on.png")));
 		} else {
-			lblIndicator.setIcon(new ImageIcon(InternalImage.loadFromPath(Constants.imageFolder, "off.png")));
+			lblIndicator.setIcon(new ImageIcon(InternalImage
+					.loadFromPath(Constants.imageFolder, "off.png")));
 		}
 	}
 

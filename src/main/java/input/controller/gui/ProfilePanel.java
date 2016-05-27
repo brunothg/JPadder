@@ -31,10 +31,10 @@ import com.jgoodies.forms.layout.RowSpec;
 import bno.swing2.widget.tab.ApplicationTab;
 import game.engine.image.InternalImage;
 import input.controller.Constants;
-import input.controller.data.ControllerId;
-import input.controller.data.Padder;
-import input.controller.data.ControllerEventQueue.ControllerEvent;
-import input.controller.data.ControllerEventQueue.ControllerListener;
+import input.controller.logic.ControllerId;
+import input.controller.logic.ControllerEventQueue.ControllerEvent;
+import input.controller.logic.ControllerEventQueue.ControllerListener;
+import input.controller.logic.padder.Padder;
 
 public class ProfilePanel extends ApplicationTab implements ActionListener, ControllerListener {
 

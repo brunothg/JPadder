@@ -8,8 +8,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import bno.swing2.dialog.ExceptionDialog;
-import input.controller.data.ControllerEventQueue;
 import input.controller.gui.GUI;
+import input.controller.logic.ControllerEventQueue;
 
 public class Main {
 

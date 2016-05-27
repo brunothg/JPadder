@@ -10,8 +10,8 @@ import javax.swing.SwingUtilities;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import input.controller.data.Padder;
-import input.controller.data.ScriptPadder;
+import input.controller.logic.padder.Padder;
+import input.controller.logic.padder.ScriptPadder;
 
 public class Editor {
 	private static final Logger LOG = LoggerFactory.getLogger(Editor.class);

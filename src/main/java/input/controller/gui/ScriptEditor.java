@@ -25,7 +25,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import bno.swing2.dialog.ExceptionDialog;
-import input.controller.data.ScriptPadder;
+import input.controller.logic.padder.ScriptPadder;
 
 public class ScriptEditor extends JPanel implements ActionListener {
 

@@ -11,6 +11,13 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.BoxLayout;
 import java.awt.Font;
 
+/**
+ * 
+ * @author marvin
+ * @see OnOffControl
+ *
+ *      Control indicator for axis.
+ */
 public class SlidingControl extends JPanel {
 
 	private static final long serialVersionUID = 1L;

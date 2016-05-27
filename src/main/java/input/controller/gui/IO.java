@@ -15,9 +15,9 @@ import org.slf4j.LoggerFactory;
 
 import bno.swing2.dialog.ExceptionDialog;
 import input.controller.Constants;
-import input.controller.data.Padder;
-import input.controller.data.ScriptPadder;
-import input.controller.doa.ScriptPadderDao;
+import input.controller.dao.ScriptPadderDao;
+import input.controller.logic.padder.Padder;
+import input.controller.logic.padder.ScriptPadder;
 
 public class IO {
 

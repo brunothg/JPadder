@@ -8,6 +8,8 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.version>1.7</java.version>
+		<application.main>input.controller.Main</application.main>
 	</properties>
 
 	<build>
@@ -16,8 +18,22 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<configuration>
+					<additionalConfig>
+						<file>
+							<name>.settings/org.eclipse.core.resources.prefs</name>
+							<content>
+                <![CDATA[eclipse.preferences.version=1${line.separator}encoding/<project>=${project.build.sourceEncoding}${line.separator}]]>
+							</content>
+						</file>
+					</additionalConfig>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -33,7 +49,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>input.controller.Main</mainClass>
+							<mainClass>${application.main}</mainClass>
 						</manifest>
 					</archive>
 					<descriptorRefs>
@@ -44,6 +60,7 @@
 			<plugin>
 				<groupId>com.googlecode.mavennatives</groupId>
 				<artifactId>maven-nativedependencies-plugin</artifactId>
+				<version>0.0.7</version>
 				<executions>
 					<execution>
 						<id>unpacknatives</id>
@@ -53,25 +70,13 @@
 						</goals>
 					</execution>
 				</executions>
+				<configuration>
+					<nativesTargetDir>target/natives</nativesTargetDir>
+					<separateDirs>false</separateDirs>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
-
-	<repositories>
-		<repository>
-			<id>lib</id>
-			<name>lib</name>
-			<releases>
-				<enabled>true</enabled>
-				<checksumPolicy>ignore</checksumPolicy>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-				<checksumPolicy>ignore</checksumPolicy>
-			</snapshots>
-			<url>file://${project.basedir}/lib/</url>
-		</repository>
-	</repositories>
 
 	<dependencies>
 		<!-- Logging -->
@@ -105,23 +110,29 @@
 		<dependency>
 			<groupId>org.mozilla</groupId>
 			<artifactId>rhino</artifactId>
-			<version>1.7.7</version>
+			<version>1.7.7.1</version>
 		</dependency>
 		<!-- GUI -->
 		<dependency>
 			<groupId>de.bno</groupId>
-			<artifactId>de.bno.gameengine</artifactId>
+			<artifactId>game.engine</artifactId>
 			<version>1.2.2</version>
 		</dependency>
 		<dependency>
 			<groupId>de.bno</groupId>
-			<artifactId>de.bno.swing2</artifactId>
+			<artifactId>swing2</artifactId>
 			<version>0.0.5</version>
 		</dependency>
 		<dependency>
 			<groupId>com.jgoodies</groupId>
 			<artifactId>jgoodies-forms</artifactId>
 			<version>1.7.2</version>
+		</dependency>
+		<!-- Utils -->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.5</version>
 		</dependency>
 	</dependencies>
 
