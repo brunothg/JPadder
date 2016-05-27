@@ -2,14 +2,12 @@ package input.controller;
 
 import javax.swing.UIManager;
 
-import org.lwjgl.LWJGLException;
-import org.lwjgl.input.Controllers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import bno.swing2.dialog.ExceptionDialog;
 import input.controller.gui.GUI;
-import input.controller.logic.ControllerEventQueue;
+import input.controller.logic.Robot;
 
 public class Main {
 
@@ -30,20 +28,10 @@ public class Main {
 	}
 
 	private static void _main(String[] args) throws Exception {
-		iniInputDevices();
+		Robot.iniInputDevices();
 
 		GUI gui = new GUI();
 		gui.setVisible(true);
-	}
-
-	private static void iniInputDevices() throws LWJGLException {
-		LOG.debug("Initialize input devices");
-		if (!Controllers.isCreated()) {
-			Controllers.create();
-		}
-
-		LOG.debug("Create event queue");
-		ControllerEventQueue.create();
 	}
 
 	private static void setLaF() {
